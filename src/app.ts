@@ -28,7 +28,7 @@ app.use(expressLogger)
 // Set application variables
 app.set('restHandler', restHandler)
 
-// Middleware to authenticate API requests
+// Middleware to authenticate all requests
 app.use(checkToken)
 
 // Routes
