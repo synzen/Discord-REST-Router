@@ -43,5 +43,5 @@ app.use(errorHandler)
 
 const usePort = port || 3000
 app.listen(usePort, () => {
-  console.log(`Example app listening at http://localhost:${usePort}`)
+  log.info(`Discord REST Router listening at http://localhost:${usePort}`)
 })
