@@ -21,9 +21,11 @@ const productionLog = winston.createLogger({
         winston.format.json()
       )
     }),
+    // Console logs are scheduled for removal in production envs
     new winston.transports.Console({
       level: 'info',
       format: winston.format.combine(
+        winston.format.colorize(),
         timestampFormat,
         winston.format.simple(),
       )
@@ -36,6 +38,7 @@ const devLog = winston.createLogger({
     new winston.transports.Console(),
   ],
   format: winston.format.combine(
+    winston.format.colorize(),
     timestampFormat,
     winston.format.simple(),
   )
