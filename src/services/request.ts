@@ -1,7 +1,7 @@
 import { Response } from "node-fetch";
 import { RESTHandler } from '@synzen/discord-rest'
 import DiscordAPIError from "../utils/errors/DiscordAPIError";
-import token from '../utils/token';
+import config from '../utils/config';
 
 const tryParseFetchError = async (res: Response) => {
   try {
@@ -17,7 +17,7 @@ const request = async (restHandler: RESTHandler, method: string, url: string, bo
   const res = await restHandler.fetch(url, {
     method,
     headers: {
-      Authorization: `Bot ${token}`,
+      Authorization: `Bot ${config.token}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)

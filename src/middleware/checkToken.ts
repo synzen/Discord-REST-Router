@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import token from '../utils/token'
+import config from '../utils/config'
 
 const checkToken = (req: Request, res: Response, next: NextFunction) => {
   const authorization = req.header('Authorization')
@@ -11,7 +11,7 @@ const checkToken = (req: Request, res: Response, next: NextFunction) => {
     })
     return
   }
-  if (parts[1] !== token) {
+  if (parts[1] !== config.token) {
     res.status(401).json({
       message: 'Bad token'
     })

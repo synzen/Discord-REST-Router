@@ -6,6 +6,7 @@ import apiRouter from './api'
 import errorHandler from './middleware/errorHandler'
 import expressLogger from './middleware/expressLogger'
 import expressErrorLogger from './middleware/expressErrorLogger'
+import { port } from './utils/config'
 
 const restHandler = new RESTHandler()
 
@@ -18,7 +19,6 @@ restHandler.on('globalRateLimit', (durationMs) => {
 })
 
 const app = express()
-const port = 3000
 
 app.use(express.json())
 
@@ -41,6 +41,7 @@ app.use(expressErrorLogger)
 // Custom error handler
 app.use(errorHandler)
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+const usePort = port || 3000
+app.listen(usePort, () => {
+  console.log(`Example app listening at http://localhost:${usePort}`)
 })
