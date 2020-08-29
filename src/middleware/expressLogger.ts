@@ -1,19 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import winston from "winston";
 import expressWinston from 'express-winston'
 import isProductionEnv from "../utils/isProductionEnv";
 import log from "../utils/log";
 import requestIp from 'request-ip'
 
 const expressLogger = (req: Request, res: Response, next: NextFunction) => {
-  if (isProductionEnv) {
+  if (!isProductionEnv) {
     expressWinston.logger({
-      transports: [
-        new winston.transports.Console()
-      ],
-      format: winston.format.combine(
-        winston.format.json(),
-      ),
+      winstonInstance: log,
+      // Authorization header contains the bot token
       headerBlacklist: ['authorization'],
       expressFormat: true,
     })(req, res, next)

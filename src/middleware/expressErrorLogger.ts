@@ -7,20 +7,9 @@ import APIError from "../utils/errors/APIError";
 import requestIp from 'request-ip'
 
 const expressErrorLogger = (err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (!err) {
-    next()
-    return
-  }
   if (isProductionEnv) {
     expressWinston.errorLogger({
-      transports: [
-        new winston.transports.Console()
-      ],
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json(),
-        winston.format.prettyPrint()
-      ),
+      winstonInstance: log,
       meta: false
     })(err, req, res, next)
   } else {
