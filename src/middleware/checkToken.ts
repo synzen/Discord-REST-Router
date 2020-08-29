@@ -3,7 +3,6 @@ import config from '../utils/config'
 
 const checkToken = (req: Request, res: Response, next: NextFunction) => {
   const authorization = req.header('Authorization')
-  if (!authorization) {}
   const parts = authorization?.split(' ')
   if (!parts || parts[0] !== 'Bot') {
     res.status(401).json({

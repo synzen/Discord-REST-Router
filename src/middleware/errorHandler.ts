@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express"
-import log from "../utils/log"
 import APIError from "../utils/errors/APIError"
 import DiscordAPIError from "../utils/errors/DiscordAPIError"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof APIError) {
     res.status(error.code).json({

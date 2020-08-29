@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import * as z from 'zod'
 import APIError from '../utils/errors/APIError';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function validate(zodSchema: z.ZodObject<any>, part: 'body'|'params'|'query') {
   async function controller(req: Request, res: Response, next: NextFunction) {
     const content = req[part];

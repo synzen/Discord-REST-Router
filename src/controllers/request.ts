@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { RESTHandler } from '@synzen/discord-rest'
 import request from "../services/request";
 import * as z from 'zod'

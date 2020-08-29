@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import winston from "winston";
 import expressWinston from 'express-winston'
 import isProductionEnv from "../utils/isProductionEnv";
 import log from "../utils/log";

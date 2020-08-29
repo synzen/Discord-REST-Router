@@ -13,7 +13,7 @@ const tryParseFetchError = async (res: Response) => {
   }
 }
 
-const request = async (restHandler: RESTHandler, method: string, url: string, body: Object) => {
+const request = async (restHandler: RESTHandler, method: string, url: string, body: Record<string, unknown>) => {
   const res = await restHandler.fetch(url, {
     method,
     headers: {
