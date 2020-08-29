@@ -5,7 +5,7 @@ import log from "../utils/log";
 import requestIp from 'request-ip'
 
 const expressLogger = (req: Request, res: Response, next: NextFunction) => {
-  if (!isProductionEnv) {
+  if (isProductionEnv) {
     expressWinston.logger({
       winstonInstance: log,
       // Authorization header contains the bot token

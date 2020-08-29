@@ -41,6 +41,6 @@ const devLog = winston.createLogger({
   )
 })
 
-const log = !isProductionEnv ? productionLog : devLog
+const log = isProductionEnv ? productionLog : devLog
 
 export default log
