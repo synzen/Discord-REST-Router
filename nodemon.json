@@ -1,6 +1,7 @@
 {
   "watch": [
-    "src"
+    "src",
+    "config.json"
   ],
   "ext": "ts",
   "ignore": [
