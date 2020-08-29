@@ -13,8 +13,8 @@ restHandler.on('rateLimit', (apiRequest: APIRequest) => {
   log.error(`Rate limit hit for ${apiRequest.toString()}`)
 })
 
-restHandler.on('globalRateLimit', () => {
-  log.error(`Global rate limit hit`)
+restHandler.on('globalRateLimit', (durationMs) => {
+  log.error(`Global rate limit hit for ${durationMs}`)
 })
 
 const app = express()
