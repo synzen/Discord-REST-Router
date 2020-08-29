@@ -9,8 +9,7 @@ import requestIp from 'request-ip'
 const expressErrorLogger = (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (isProductionEnv) {
     expressWinston.errorLogger({
-      winstonInstance: log,
-      meta: false
+      winstonInstance: log
     })(err, req, res, next)
   } else {
     res.once('finish', () => {
