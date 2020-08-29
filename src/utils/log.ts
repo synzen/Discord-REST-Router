@@ -1,23 +1,33 @@
 import winston from 'winston'
 import isProductionEnv from './isProductionEnv'
 
+const timestampFormat = winston.format.timestamp()
+
 const productionLog = winston.createLogger({
   transports: [
     new winston.transports.File({
-      filename: 'combined.log',
-      level: 'info'
+      filename: 'logs/combined.log',
+      level: 'info',
+      format: winston.format.combine(
+        timestampFormat,
+        winston.format.json()
+      )
     }),
     new winston.transports.File({
-      filename: 'error.log',
-      level: 'error'
+      filename: 'logs/error.log',
+      level: 'error',
+      format: winston.format.combine(
+        timestampFormat,
+        winston.format.json()
+      )
     }),
     new winston.transports.Console({
       level: 'info',
       format: winston.format.combine(
+        timestampFormat,
         winston.format.simple(),
-        winston.format.timestamp()
       )
-    })
+    }),
   ]
 })
 
@@ -26,11 +36,11 @@ const devLog = winston.createLogger({
     new winston.transports.Console(),
   ],
   format: winston.format.combine(
+    timestampFormat,
     winston.format.simple(),
-    winston.format.timestamp()
   )
 })
 
-const log = isProductionEnv ? productionLog : devLog
+const log = !isProductionEnv ? productionLog : devLog
 
 export default log
