@@ -17,8 +17,8 @@ restHandler.on('rateLimit', (apiRequest: APIRequest) => {
   Stats.addBucketRateLimitHit()
 })
 
-restHandler.on('globalRateLimit', (durationMs) => {
-  log.error(`Global rate limit hit for ${durationMs}`)
+restHandler.on('globalRateLimit', (apiRequest, durationMs) => {
+  log.error(`Global rate limit hit for ${apiRequest.toString()} (retry after ${durationMs}s)`)
   Stats.addGlobalRateLimitHit()
 })
 
