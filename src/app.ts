@@ -12,13 +12,13 @@ import Stats from './services/Stats'
 
 const restHandler = new RESTHandler()
 
-restHandler.on('rateLimit', (apiRequest: APIRequest) => {
-  log.error(`Rate limit hit for ${apiRequest.toString()}`)
+restHandler.on('rateLimit', (apiRequest: APIRequest, durationMs: number) => {
+  log.error(`Rate limit hit for ${apiRequest.toString()} (retry after ${durationMs})ms`)
   Stats.addBucketRateLimitHit()
 })
 
 restHandler.on('globalRateLimit', (apiRequest, durationMs) => {
-  log.error(`Global rate limit hit for ${apiRequest.toString()} (retry after ${durationMs}s)`)
+  log.error(`Global rate limit hit for ${apiRequest.toString()} (retry after ${durationMs}ms)`)
   Stats.addGlobalRateLimitHit()
 })
 
