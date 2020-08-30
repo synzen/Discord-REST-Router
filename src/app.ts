@@ -7,18 +7,25 @@ import errorHandler from './middleware/errorHandler'
 import expressLogger from './middleware/expressLogger'
 import expressErrorLogger from './middleware/expressErrorLogger'
 import { port } from './utils/config'
+import recordResponseTime from './middleware/recordResponseTime'
+import Stats from './services/stats'
 
 const restHandler = new RESTHandler()
 
 restHandler.on('rateLimit', (apiRequest: APIRequest) => {
   log.error(`Rate limit hit for ${apiRequest.toString()}`)
+  Stats.addBucketRateLimitHit()
 })
 
 restHandler.on('globalRateLimit', (durationMs) => {
   log.error(`Global rate limit hit for ${durationMs}`)
+  Stats.addGlobalRateLimitHit()
 })
 
 const app = express()
+
+// Used to measure average response times
+app.use(recordResponseTime)
 
 app.use(express.json())
 
