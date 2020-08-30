@@ -8,6 +8,11 @@ const expressLogger = (req: Request, res: Response, next: NextFunction) => {
   if (isProductionEnv) {
     expressWinston.logger({
       winstonInstance: log,
+      dynamicMeta: (thisReq) => {
+        return {
+          ip: requestIp.getClientIp(thisReq)
+        }
+      },
       // Authorization header contains the bot token
       headerBlacklist: ['authorization'],
       expressFormat: true,
