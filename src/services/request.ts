@@ -23,7 +23,10 @@ const request = async (restHandler: RESTHandler, method: string, url: string, bo
   })
   if (!res.ok) {
     const discordResponse = await tryParseFetchError(res)
-    throw new DiscordAPIError(`Bad status code (${res.status}) from Discord`, res.status, discordResponse)
+    throw new DiscordAPIError(`Bad status code (${res.status}) from Discord`, 400, {
+      status: res.status,
+      body: discordResponse
+    })
   }
 }
 

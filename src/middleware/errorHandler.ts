@@ -11,7 +11,7 @@ const errorHandler = (error: Error, req: Request, res: Response, next: NextFunct
       errors: error.errors || []
     })
   } else if (error instanceof DiscordAPIError) {
-    res.status(400).json({
+    res.status(error.code).json({
       message: error.message,
       discord: true,
       discordResponse: error.response
