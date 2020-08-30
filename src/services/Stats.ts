@@ -45,6 +45,16 @@ class Stats {
     this.lastInvalidRequestsReset = new Date()
   }
 
+  static resetAll () {
+    this.totalResponseTimes = 0
+    this.totalResponseTimesCount = 0
+    this.highestResponseTime = -1
+    this.bucketRateLimitHits = 0
+    this.globalRateLimitHits = 0
+    this.abortedRequests = 0
+    // Don't clear invalid requests stats since it clears on a timer
+  }
+
   static toJSON () {
     return {
       totalResponseTimes: this.totalResponseTimes,
