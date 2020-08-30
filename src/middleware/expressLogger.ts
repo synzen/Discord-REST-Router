@@ -15,7 +15,7 @@ const expressLogger = (req: Request, res: Response, next: NextFunction) => {
   } else {
     res.once('finish', () => {
       const ip = requestIp.getClientIp(req)
-      log.info(`${ip} ${res.statusCode} ${req.originalUrl} | body: ${JSON.stringify(req.body, null, 2)}`)
+      log.info(`${ip} ${res.statusCode} ${req.originalUrl} | body: ${JSON.stringify(req.body)}`)
     })
     next()
   }
