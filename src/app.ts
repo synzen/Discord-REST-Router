@@ -8,7 +8,7 @@ import expressLogger from './middleware/expressLogger'
 import expressErrorLogger from './middleware/expressErrorLogger'
 import { port } from './utils/config'
 import recordResponseTime from './middleware/recordResponseTime'
-import Stats from './services/stats'
+import Stats from './services/Stats'
 
 const restHandler = new RESTHandler()
 

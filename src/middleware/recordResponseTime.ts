@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Stats from "../services/stats";
+import Stats from "../services/Stats";
 
 const recordResponseTime = (req: Request, res: Response, next: NextFunction) => {
   // Only record response times of Discord API requests
