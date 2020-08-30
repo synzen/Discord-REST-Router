@@ -6,6 +6,7 @@ class Stats {
   private static globalRateLimitHits = 0
   private static abortedRequests = 0
   private static invalidRequests = 0
+  private static lastInvalidRequestReset = new Date()
 
   static recordResponseTime (time: number) {
     this.totalResponseTimes += time
@@ -39,6 +40,11 @@ class Stats {
     ++this.invalidRequests
   }
 
+  static resetInvalidRequests () {
+    this.invalidRequests = 0
+    this.lastInvalidRequestReset = new Date()
+  }
+
   static toJSON () {
     return {
       totalResponseTimes: this.totalResponseTimes,
@@ -48,9 +54,15 @@ class Stats {
       bucketRateLimitHits: this.bucketRateLimitHits,
       globalRateLimitHits: this.globalRateLimitHits,
       abortedRequests: this.abortedRequests,
-      invalidRequests: this.invalidRequests
+      invalidRequests: this.invalidRequests,
+      lastInvalidRequestReset: this.lastInvalidRequestReset
     }
   }
 }
+
+// Record the number of invalid requests every 10 minutes
+setInterval(() => {
+  Stats.resetInvalidRequests()
+}, 1000 * 60 * 10)
 
 export default Stats
