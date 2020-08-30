@@ -6,7 +6,7 @@ class Stats {
   private static globalRateLimitHits = 0
   private static abortedRequests = 0
   private static invalidRequests = 0
-  private static lastInvalidRequestReset = new Date()
+  private static lastInvalidRequestsReset = new Date()
 
   static recordResponseTime (time: number) {
     this.totalResponseTimes += time
@@ -42,7 +42,7 @@ class Stats {
 
   static resetInvalidRequests () {
     this.invalidRequests = 0
-    this.lastInvalidRequestReset = new Date()
+    this.lastInvalidRequestsReset = new Date()
   }
 
   static toJSON () {
@@ -55,7 +55,7 @@ class Stats {
       globalRateLimitHits: this.globalRateLimitHits,
       abortedRequests: this.abortedRequests,
       invalidRequests: this.invalidRequests,
-      lastInvalidRequestReset: this.lastInvalidRequestReset
+      lastInvalidRequestsReset: this.lastInvalidRequestsReset
     }
   }
 }
