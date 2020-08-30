@@ -3,7 +3,7 @@ import Stats from '../services/Stats'
 
 async function getStats (req: Request, res: Response) {
   res.json({
-    averageResponseTime: Stats.averageResponseTime,
+    averageResponseTime: Stats.getAverageResponseTime(),
     highestResponseTime: Stats.highestResponseTime,
     bucketRateLimitHits: Stats.bucketRateLimitHits,
     globalRateLimitHits: Stats.globalRateLimitHits
