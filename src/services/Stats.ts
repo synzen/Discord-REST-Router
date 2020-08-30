@@ -1,10 +1,11 @@
 class Stats {
-  private static totalResponseTimes = 0
-  private static totalResponseTimesCount = 0
+  static totalResponseTimes = 0
+  static totalResponseTimesCount = 0
   static averageResponseTime = -1
   static highestResponseTime = -1
   static bucketRateLimitHits = 0
   static globalRateLimitHits = 0
+  static abortedRequests = 0
 
   static recordResponseTime (time: number) {
     this.totalResponseTimes += time
@@ -28,6 +29,22 @@ class Stats {
 
   static addGlobalRateLimitHit () {
     ++this.globalRateLimitHits
+  }
+
+  static addAbortedRequest () {
+    this.abortedRequests++
+  }
+
+  static toJSON () {
+    return {
+      totalResponseTimes: this.totalResponseTimes,
+      totalResponseTimesCount: this.totalResponseTimesCount,
+      averageResponseTime: this.getAverageResponseTime(),
+      highestResponseTime: this.highestResponseTime,
+      bucketRateLimitHits: this.bucketRateLimitHits,
+      globalRateLimitHits: this.globalRateLimitHits,
+      abortedRequests: this.abortedRequests
+    }
   }
 }
 
