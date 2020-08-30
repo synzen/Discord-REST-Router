@@ -22,6 +22,10 @@ restHandler.on('globalRateLimit', (apiRequest, durationMs) => {
   Stats.addGlobalRateLimitHit()
 })
 
+restHandler.on('invalidRequest', () => {
+  Stats.addInvalidRequest()
+})
+
 const app = express()
 
 // Used to measure average response times

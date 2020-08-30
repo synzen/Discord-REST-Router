@@ -1,11 +1,11 @@
 class Stats {
-  static totalResponseTimes = 0
-  static totalResponseTimesCount = 0
-  static averageResponseTime = -1
-  static highestResponseTime = -1
-  static bucketRateLimitHits = 0
-  static globalRateLimitHits = 0
-  static abortedRequests = 0
+  private static totalResponseTimes = 0
+  private static totalResponseTimesCount = 0
+  private static highestResponseTime = -1
+  private static bucketRateLimitHits = 0
+  private static globalRateLimitHits = 0
+  private static abortedRequests = 0
+  private static invalidRequests = 0
 
   static recordResponseTime (time: number) {
     this.totalResponseTimes += time
@@ -32,7 +32,11 @@ class Stats {
   }
 
   static addAbortedRequest () {
-    this.abortedRequests++
+    ++this.abortedRequests
+  }
+
+  static addInvalidRequest () {
+    ++this.invalidRequests
   }
 
   static toJSON () {
@@ -43,7 +47,8 @@ class Stats {
       highestResponseTime: this.highestResponseTime,
       bucketRateLimitHits: this.bucketRateLimitHits,
       globalRateLimitHits: this.globalRateLimitHits,
-      abortedRequests: this.abortedRequests
+      abortedRequests: this.abortedRequests,
+      invalidRequests: this.invalidRequests
     }
   }
 }
