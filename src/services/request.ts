@@ -6,8 +6,7 @@ import config from '../utils/config';
 const tryParseFetchError = async (res: Response) => {
   try {
     const json = await res.json()
-    console.log('json here', json)
-    return json.message
+    return json
   } catch (err) {
     return null
   }
@@ -23,8 +22,8 @@ const request = async (restHandler: RESTHandler, method: string, url: string, bo
     body: JSON.stringify(body)
   })
   if (!res.ok) {
-    const message = await tryParseFetchError(res)
-    throw new DiscordAPIError(message || `Bad status code (${res.status}) from Discord`, res.status)
+    const discordResponse = await tryParseFetchError(res)
+    throw new DiscordAPIError(`Bad status code (${res.status}) from Discord`, res.status, discordResponse)
   }
 }
 

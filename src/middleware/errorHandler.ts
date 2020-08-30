@@ -13,7 +13,8 @@ const errorHandler = (error: Error, req: Request, res: Response, next: NextFunct
     // log.error(error.message)
     res.status(400).json({
       message: error.message,
-      discord: true
+      discord: true,
+      discordResponse: error.response
     })
   } else {
     // log.error(error.message)
