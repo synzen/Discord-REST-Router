@@ -11,7 +11,7 @@ import {
  *
  * @param controller Controller function
  */
-function asyncRouteWrapper(controller: RequestHandler): void {
+function asyncRouteWrapper(controller: RequestHandler) {
   async function wrapper(request: Request, response: Response, next: NextFunction) {
     try {
       await controller(request, response, next);

@@ -6,7 +6,7 @@ import asyncRouteWrapper from '../utils/asyncRouteWrapper'
 
 const apiRouter = express.Router()
 
-apiRouter.post(`/request`,[
+apiRouter.post(`/request`, [
   validate(requestBodySchema, 'body')
 ], asyncRouteWrapper(requestController))
 
