@@ -8,7 +8,7 @@ const tryParseFetchError = async (res: Response) => {
     const json = await res.json()
     return json
   } catch (err) {
-    return null
+    return {}
   }
 }
 
